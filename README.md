@@ -1,1 +1,1 @@
-# task_list
+A basic todos app using node.js, express and pug
