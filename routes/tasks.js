@@ -9,9 +9,11 @@ var db = new sqlite3.Database('db.sqlite');
 router.get('/', (req, res, next) => {
   const query = 'SELECT * FROM tasks;'
   db.all(query, (err, rows) => {
+    if (err) {
+      throw err
+    }
     res.render('tasks', { rows: rows })
   })
-  // res.render('respond with a resource');
 })
 
 router.get('/new', (req, res, next) => {
@@ -33,7 +35,6 @@ router.post('/', (req, res, next) => {
 })
 
 router.get('/:id/destroy', (req, res, next) => {
-  console.log(req.params.id)
   let stmt = db.prepare('DELETE FROM tasks WHERE id = ?;')
   stmt.run(req.params.id)
   stmt.finalize()

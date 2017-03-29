@@ -6,4 +6,5 @@ block content
     each task in rows
       li #{task.title} - #{task.name} (#{task.email}) |
         a(href='/tasks/' + task.id + '/destroy') Destroy
-  a(href='/tasks/new') New Task
+  a(href='/tasks/new') New Task  
+  a(href='/settings') Settings
