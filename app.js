@@ -28,7 +28,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser('keyboard cat'));
 app.use(cookieSession({
   name: 'session',
-  keys: ['tst'],
+  keys: ['test'],
   // Cookie Options
   maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }));

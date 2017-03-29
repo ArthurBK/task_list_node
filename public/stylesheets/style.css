@@ -6,3 +6,9 @@ body {
 a {
   color: #00B7FF;
 }
+
+form > input {
+  border-radius: 3px;
+  border: 1px solid #cecece;
+  margin-bottom: 3px;
+}

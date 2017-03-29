@@ -5,10 +5,7 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     - if (messages)
-      - if (messages.error)
+      each error in messages
         .message.error
-          span= messages.error
-      - if (messages.info)
-        .message.info
-          span= messages.info
+          span= error
     block content
