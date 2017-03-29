@@ -33,7 +33,11 @@ router.post('/', (req, res, next) => {
 })
 
 router.get('/:id/destroy', (req, res, next) => {
-  console.log('DESTROY')
+  console.log(req.params.id)
+  let stmt = db.prepare('DELETE FROM tasks WHERE id = ?;')
+  stmt.run(req.params.id)
+  stmt.finalize()
+  res.redirect('/tasks')
 })
 
 module.exports = router;
