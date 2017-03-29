@@ -46,7 +46,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-const query_task =  'CREATE TABLE IF NOT EXISTS "tasks"' +
+const query_task =  'CREATE TABLE IF NOT EXISTS "tasks" ' +
                     '(id INTEGER PRIMARY KEY,' +
                     'name VARCHAR(255),' +
                     'email VARCHAR(255),' +

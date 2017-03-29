@@ -1,0 +1,8 @@
+extends layout
+
+block content
+  h1 Tasks
+  ul
+    each task in rows
+      li= task
+  a(href='/tasks/new') New Task
