@@ -3,7 +3,9 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
+var cookieSession = require('cookie-session');
 var bodyParser = require('body-parser');
+var flash = require('express-flash');
 
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('db.sqlite');
@@ -22,8 +24,16 @@ app.set('view engine', 'pug');
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
+app.use(cookieParser('keyboard cat'));
+app.use(cookieSession({
+  name: 'session',
+  keys: ['tst'],
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}));
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(flash());
 
 app.use('/', index);
 app.use('/tasks', tasks);
@@ -47,7 +57,7 @@ app.use(function(err, req, res, next) {
 });
 
 const query_task =  'CREATE TABLE IF NOT EXISTS "tasks" ' +
-                    '(id INTEGER PRIMARY KEY,' +
+                    '(id INTEGER PRIMARY KEY AUTOINCREMENT,' +
                     'name VARCHAR(255),' +
                     'email VARCHAR(255),' +
                     'title VARCHAR(255))'

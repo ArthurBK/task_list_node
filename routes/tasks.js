@@ -18,15 +18,22 @@ router.get('/new', (req, res, next) => {
   res.render('new_task')
 })
 
+router.post('/', (req, res, next) => {
+  console.log(req.body)
+  if (req.body.name.trim() && req.body.email.trim() && req.body.title.trim()) {
+    let stmt = db.prepare('INSERT INTO tasks(name, email, title) VALUES (?, ?, ?)')
+    stmt.run(req.body.name, req.body.email, req.body.title)
+    stmt.finalize()
+    res.redirect('/tasks')
+  }
+  else {
+    req.flash('error', 'Please fill all fields')
+    res.redirect('/tasks/new')
+  }
+})
+
+router.get('/:id/destroy', (req, res, next) => {
+  console.log('DESTROY')
+})
+
 module.exports = router;
-
-
-
-// var stmt = db.prepare('INSERT INTO tasks VALUES (?, ?, ?)')
-//
-// for (var i = 0; i < 10; i++) {
-//   stmt.run('Ipsum ' + i)
-// }
-//
-// stmt.finalize()
-//
