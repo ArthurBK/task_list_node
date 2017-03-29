@@ -5,8 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var sqlite3 = require('sqlite3').verbose();
+var db = new sqlite3.Database('db.sqlite');
+
 var index = require('./routes/index');
-var users = require('./routes/users');
+var tasks = require('./routes/tasks');
 
 var app = express();
 
@@ -23,7 +26,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
-app.use('/users', users);
+app.use('/tasks', tasks);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -41,6 +44,18 @@ app.use(function(err, req, res, next) {
   // render the error page
   res.status(err.status || 500);
   res.render('error');
+});
+
+const query_task =  'CREATE TABLE IF NOT EXISTS "tasks"' +
+                    '(id INTEGER PRIMARY KEY,' +
+                    'name VARCHAR(255),' +
+                    'email VARCHAR(255),' +
+                    'title VARCHAR(255))'
+
+db.run(query_task, function(err) {
+    if (err) {
+        console.log(err);
+    }
 });
 
 module.exports = app;
