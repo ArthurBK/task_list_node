@@ -4,7 +4,7 @@ block content
   h1 Tasks
   ul
     each task in rows
-      li #{task.title} - #{task.name} (#{task.email}) |
+      li #{task.title} 
         a(href='/tasks/' + task.id + '/destroy') Destroy
   a(href='/tasks/new') New Task
   br
