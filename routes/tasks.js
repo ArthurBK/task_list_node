@@ -4,7 +4,6 @@ var router = express.Router();
 var sqlite3 = require('sqlite3').verbose();
 var db = new sqlite3.Database('db.sqlite');
 
-
 /* GET tasks listing. */
 router.get('/', (req, res, next) => {
   const query = 'SELECT * FROM tasks;'
